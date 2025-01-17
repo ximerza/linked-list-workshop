@@ -46,15 +46,17 @@ def test_swap_nodes_in_pairs(data, expected):
     from datastruct.exercises.solution_2 import swap_nodes_in_pairs
 
     linked_list = LinkedList[int]()
-    original = LinkedList[int]()
     for value in data[::-1]:
         linked_list.insert(value)
-        original.insert(value)
+
+    original_head_id = id(linked_list.head)
 
     result = swap_nodes_in_pairs(linked_list)
 
+    new_head_id = id(result.head)
+
     if len(linked_list) > 1:
-        assert result.head.data != linked_list.head.data
+        assert original_head_id != new_head_id
 
     assert list(result) == expected
     assert len(result) == len(expected)
