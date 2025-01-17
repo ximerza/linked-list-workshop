@@ -298,7 +298,7 @@ class DoublyLinkedList[T]:
             self.head.prev = new_node
         self.head = new_node
 
-    def insert_at(self, new_data: T, goal: Any, key: Callable[[Any], Any] = identity):
+    def insert_at(self, new_data: T, goal: Any, key: Callable[[Any], Any] = identity) -> DoublyNode[T]:
         if self.is_empty():
             raise Exception("List is empty")
         current = self.head
@@ -308,7 +308,7 @@ class DoublyLinkedList[T]:
                 new_node.next = current.next
                 new_node.prev = current
                 current.next = new_node
-                return
+                return new_node
             current = current.next
         raise Exception("Key not found")
 

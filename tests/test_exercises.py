@@ -93,3 +93,31 @@ def test_sort_list_by_insertion(data, expected):
     result = sort_list_by_insertion(linked_list)
     assert list(result) == expected
     assert len(result) == len(expected)
+
+
+@pytest.mark.parametrize(
+    "operations, params, expected",
+    [
+        (
+            ["BrowserHistory", "visit", "visit", "visit", "back", "back", "forward", "visit", "forward", "back", "back"],
+            [["leetcode.com"], ["google.com"], ["facebook.com"], ["youtube.com"], [1], [1], [1], ["linkedin.com"], [2], [2], [7]],
+            [None, None, None, None, "facebook.com", "google.com", "facebook.com", None, "linkedin.com", "google.com", "leetcode.com"]
+        )
+    ]
+)
+def test_browser_history(operations, params, expected):
+    from datastruct.exercises.solution_4 import BrowserHistory
+
+    browser_history = None
+    results = []
+    for operation, param in zip(operations, params):
+        if operation == "BrowserHistory":
+            browser_history = BrowserHistory(*param)
+            results.append(None)
+        else:
+            method = getattr(browser_history, operation)
+            results.append(method(*param))
+
+    assert results == expected
+    assert len(results) == len(expected)
+    assert all(result is None or isinstance(result, str) for result in results)
