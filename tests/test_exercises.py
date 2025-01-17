@@ -60,3 +60,36 @@ def test_swap_nodes_in_pairs(data, expected):
 
     assert list(result) == expected
     assert len(result) == len(expected)
+
+@pytest.mark.parametrize(
+    "data, expected",
+    [
+        ([1, 2, 3, 4], [1, 2, 3, 4]),
+        ([4, 3, 2, 1], [1, 2, 3, 4]),
+        ([1, 3, 2, 4], [1, 2, 3, 4]),
+        ([1, 2, 3, 4, 5], [1, 2, 3, 4, 5]),
+        ([5, 4, 3, 2, 1], [1, 2, 3, 4, 5]),
+        ([1, 3, 2, 5, 4], [1, 2, 3, 4, 5]),
+        ([1], [1]),
+        ([1, 2], [1, 2]),
+        ([2, 1], [1, 2]),
+        ([1, 2, 3], [1, 2, 3]),
+        ([3, 2, 1], [1, 2, 3]),
+        ([1, 3, 2], [1, 2, 3]),
+        ([1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6]),
+        ([6, 5, 4, 3, 2, 1], [1, 2, 3, 4, 5, 6]),
+        ([1, 3, 2, 5, 4, 6], [1, 2, 3, 4, 5, 6]),
+        ([], [])
+    ]
+)
+def test_sort_list_by_insertion(data, expected):
+    from datastruct.classes.lists import LinkedList
+    from datastruct.exercises.solution_3 import sort_list_by_insertion
+
+    linked_list = LinkedList[int]()
+    for value in data:
+        linked_list.insert(value)
+
+    result = sort_list_by_insertion(linked_list)
+    assert list(result) == expected
+    assert len(result) == len(expected)
